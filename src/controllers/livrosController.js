@@ -82,10 +82,9 @@ class LivroController {
 
       const busca = {};
       if (editora) busca.editora = editora;
-      if (titulo) busca.titulo = titulo;
-
+      if (titulo) busca.titulo = { $regex: titulo, $options: "i" };
       const livrosResultado = await livros.find(busca);
-
+      
       res.status(200).send(livrosResultado);
     } catch (erro) {
       next(erro); 
@@ -93,4 +92,4 @@ class LivroController {
   }
 }
 
-export default LivroController
+export default LivroController;
